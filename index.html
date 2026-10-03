@@ -1109,5 +1109,70 @@
             }, 3000);
         }
 
-        // Hover effect for clickable elements
-// ... existing code ... -->
+        // Premium cursor controller
+        (function(){
+            const finePointer = window.matchMedia && window.matchMedia("(pointer:fine)").matches;
+            const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if(!finePointer || reduced) return;
+
+            const body = document.body;
+            const dot = document.getElementById("cursorDot");
+            const ring = document.getElementById("cursorRing");
+            if(!dot || !ring) return;
+
+            body.classList.add("cursor-enabled");
+
+            const label = document.createElement("div");
+            label.className = "cursor-label";
+            document.body.appendChild(label);
+
+            const trails = [];
+            const count = 8;
+            const points = Array.from({length:count},()=>({x:mouseX,y:mouseY}));
+
+            for(let i=0;i<count;i++){
+                const trail = document.createElement("div");
+                trail.className = "cursor-trail";
+                trail.style.width = (12 - i * .7) + "px";
+                trail.style.height = (12 - i * .7) + "px";
+                document.body.appendChild(trail);
+                trails.push(trail);
+            }
+
+            function animatePremiumCursor(){
+                let tx = mouseX, ty = mouseY;
+                points.forEach((point,i)=>{
+                    point.x += (tx-point.x) * (.25 - i*.018);
+                    point.y += (ty-point.y) * (.25 - i*.018);
+                    trails[i].style.transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
+                    trails[i].style.opacity = String(Math.max(.035,.16-i*.015));
+                    tx = point.x;
+                    ty = point.y;
+                });
+                requestAnimationFrame(animatePremiumCursor);
+            }
+            animatePremiumCursor();
+
+            const hoverables = document.querySelectorAll("a,button,.cursor-pointer,[onclick],input,select,textarea,img,.article-card");
+            hoverables.forEach(el=>{
+                el.addEventListener("pointerenter",()=>{
+                    body.classList.add("cursor-hover");
+                    label.textContent = el.getAttribute("data-cursor-label") ||
+                        (el.tagName==="IMG" ? "VIEW" : el.tagName==="BUTTON" ? "CLICK" : "OPEN");
+                });
+                el.addEventListener("pointerleave",()=>{
+                    body.classList.remove("cursor-hover");
+                    label.textContent = "";
+                });
+            });
+
+            window.addEventListener("pointermove",(e)=>{
+                label.style.left = (e.clientX + 18) + "px";
+                label.style.top = (e.clientY + 18) + "px";
+            },{passive:true});
+
+            window.addEventListener("pointerdown",()=>{
+                body.classList.add("cursor-click");
+                setTimeout(()=>body.classList.remove("cursor-click"),180);
+            },{passive:true});
+        })();
