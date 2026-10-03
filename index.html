@@ -319,6 +319,29 @@
   }
 </style>
     <link rel="icon" type="image/png" href="./favicon.png?v=2">
+<style id="imm-modern-upgrade">
+  :root{--imm-red:#cc0000;--imm-gold:#ffd700;--imm-black:#121212}
+  .imm-section-label{display:inline-flex;align-items:center;gap:.55rem}
+  .imm-section-label::before{content:"";width:24px;height:2px;border-radius:999px;background:var(--imm-gold)}
+  .imm-emblem-orbit{position:absolute;right:5%;top:18%;width:290px;height:290px;border-radius:50%;border:1px solid rgba(255,215,0,.18);box-shadow:0 0 80px rgba(255,215,0,.08) inset}
+  .imm-emblem-orbit::before,.imm-emblem-orbit::after{content:"";position:absolute;border-radius:50%;inset:18px;border:1px dashed rgba(255,255,255,.13);animation:imm-orbit 18s linear infinite}
+  .imm-emblem-orbit::after{inset:46px;border-color:rgba(204,0,0,.22);animation-duration:12s;animation-direction:reverse}
+  .imm-emblem{position:absolute;inset:45px;display:grid;place-items:center;z-index:2}
+  .imm-emblem img{width:185px;height:185px;object-fit:contain;filter:drop-shadow(0 18px 35px rgba(0,0,0,.35));animation:imm-emblem-float 5s ease-in-out infinite}
+  @keyframes imm-orbit{to{transform:rotate(360deg)}}
+  @keyframes imm-emblem-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
+  .imm-program-card{position:relative;overflow:hidden;border:1px solid rgba(229,231,235,.9);background:rgba(255,255,255,.96);transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
+  .imm-program-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--imm-red),var(--imm-gold));transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+  .imm-program-card:hover{transform:translateY(-8px);box-shadow:0 22px 45px rgba(17,24,39,.10);border-color:rgba(204,0,0,.18)}
+  .imm-program-card:hover::after{transform:scaleX(1)}
+  .imm-program-icon{transition:transform .35s ease,background .35s ease,color .35s ease}
+  .imm-program-card:hover .imm-program-icon{transform:rotate(-6deg) scale(1.08);background:var(--imm-red);color:#fff}
+  .imm-active-link{color:#fff!important;background:#cc0000!important;box-shadow:0 8px 18px rgba(204,0,0,.18)}
+  .imm-kicker{letter-spacing:.16em}
+  @media(max-width:1023px){.imm-emblem-orbit{width:220px;height:220px;right:-70px;top:14%;opacity:.28}.imm-emblem img{width:140px;height:140px}}
+  @media(max-width:640px){.imm-emblem-orbit{width:170px;height:170px;right:-75px;top:22%;opacity:.18}.imm-emblem{inset:26px}.imm-emblem img{width:110px;height:110px}}
+  @media(prefers-reduced-motion:reduce){.imm-emblem-orbit::before,.imm-emblem-orbit::after,.imm-emblem img{animation:none!important}}
+</style>
 </head>
 <body class="font-sans bg-gray-50 text-gray-800 antialiased selection:bg-imm-red selection:text-white">
 
@@ -434,7 +457,10 @@
         <div class="absolute top-1/4 left-10 w-28 h-28 bg-imm-gold/25 rounded-full blur-xl animate-float"></div>
         <div class="absolute bottom-1/4 right-10 w-36 h-36 bg-imm-red/35 rounded-full blur-2xl animate-float" style="animation-delay: 2s;"></div>
 
-        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+        <div class="imm-emblem-orbit pointer-events-none hidden sm:block" aria-hidden="true">
+            <div class="imm-emblem"><img src="./favicon.png?v=4" alt="" loading="eager"></div>
+        </div>
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
             <div class="flex justify-center items-center gap-3 mb-6 flex-wrap">
                 <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/10 backdrop-blur-md text-imm-gold border border-white/20 font-bold text-xs uppercase tracking-wider shadow-md">
                     <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span> Otonom Muhammadiyah
@@ -466,11 +492,11 @@
                     <div class="text-xs text-gray-300 mt-1">Periode Kepengurusan</div>
                 </div>
                 <div class="text-center transform hover:scale-105 transition">
-                    <div class="text-3xl font-extrabold text-white">3+</div>
+                    <div class="text-3xl font-extrabold text-white"><span data-counter="3">0</span>+</div>
                     <div class="text-xs text-gray-300 mt-1">Bidang Utama</div>
                 </div>
                 <div class="text-center transform hover:scale-105 transition">
-                    <div class="text-3xl font-extrabold text-imm-gold">150+</div>
+                    <div class="text-3xl font-extrabold text-imm-gold"><span data-counter="150">0</span>+</div>
                     <div class="text-xs text-gray-300 mt-1">Kader Aktif</div>
                 </div>
                 <div class="text-center transform hover:scale-105 transition">
@@ -546,7 +572,37 @@
         </div>
     </section>
 
-    <section id="artikel" class="py-24 bg-white">
+    <section id="program" class="py-24 bg-white relative overflow-hidden">
+        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-red-50 blur-3xl opacity-70 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-12">
+                <div>
+                    <span class="imm-section-label text-imm-red font-bold text-xs md:text-sm uppercase imm-kicker">Ruang Tumbuh</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-3">Apa yang Kami Kerjakan?</h2>
+                    <p class="text-gray-500 mt-3 max-w-2xl leading-relaxed">Ruang belajar, bergerak, dan berkontribusi bagi kader melalui perkaderan, tradisi intelektual, pengabdian, dan pengembangan media.</p>
+                </div>
+                <div class="hidden md:flex items-center gap-3 text-xs font-bold text-gray-400 uppercase tracking-widest">
+                    <span class="w-10 h-10 rounded-full bg-red-50 text-imm-red grid place-items-center"><i class="fas fa-arrow-down"></i></span>
+                    Jelajahi perjalanan kami
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="imm-program-card rounded-3xl p-7"><div class="imm-program-icon w-12 h-12 rounded-2xl bg-red-50 text-imm-red grid place-items-center text-xl mb-5"><i class="fas fa-users"></i></div><h3 class="font-extrabold text-xl text-gray-900 mb-2">Perkaderan</h3><p class="text-sm text-gray-500 leading-relaxed">Menumbuhkan kader yang memiliki fondasi nilai, kapasitas kepemimpinan, dan semangat berproses.</p></div>
+                <div class="imm-program-card rounded-3xl p-7"><div class="imm-program-icon w-12 h-12 rounded-2xl bg-red-50 text-imm-red grid place-items-center text-xl mb-5"><i class="fas fa-lightbulb"></i></div><h3 class="font-extrabold text-xl text-gray-900 mb-2">Keilmuan</h3><p class="text-sm text-gray-500 leading-relaxed">Diskusi, kajian, dan literasi menjadi ruang untuk mengasah nalar kritis dan keberanian berdialog.</p></div>
+                <div class="imm-program-card rounded-3xl p-7"><div class="imm-program-icon w-12 h-12 rounded-2xl bg-red-50 text-imm-red grid place-items-center text-xl mb-5"><i class="fas fa-hands-helping"></i></div><h3 class="font-extrabold text-xl text-gray-900 mb-2">Pengabdian</h3><p class="text-sm text-gray-500 leading-relaxed">Menghubungkan gagasan dengan tindakan melalui kepedulian sosial dan pengabdian kepada masyarakat.</p></div>
+                <div class="imm-program-card rounded-3xl p-7"><div class="imm-program-icon w-12 h-12 rounded-2xl bg-red-50 text-imm-red grid place-items-center text-xl mb-5"><i class="fas fa-mosque"></i></div><h3 class="font-extrabold text-xl text-gray-900 mb-2">Keislaman</h3><p class="text-sm text-gray-500 leading-relaxed">Membangun tradisi keberagamaan yang reflektif, berkemajuan, dan dekat dengan realitas kehidupan mahasiswa.</p></div>
+                <div class="imm-program-card rounded-3xl p-7"><div class="imm-program-icon w-12 h-12 rounded-2xl bg-red-50 text-imm-red grid place-items-center text-xl mb-5"><i class="fas fa-bullhorn"></i></div><h3 class="font-extrabold text-xl text-gray-900 mb-2">Media & Komunikasi</h3><p class="text-sm text-gray-500 leading-relaxed">Menyebarkan gagasan dan dokumentasi gerakan melalui komunikasi publik yang kreatif dan informatif.</p></div>
+                <div class="imm-program-card rounded-3xl p-7"><div class="imm-program-icon w-12 h-12 rounded-2xl bg-red-50 text-imm-red grid place-items-center text-xl mb-5"><i class="fas fa-seedling"></i></div><h3 class="font-extrabold text-xl text-gray-900 mb-2">Pengembangan Kader</h3><p class="text-sm text-gray-500 leading-relaxed">Mendorong potensi personal, kolaborasi lintas bidang, dan kesiapan kader untuk mengambil peran.</p></div>
+            </div>
+            <div class="mt-10 rounded-3xl bg-gray-950 text-white p-7 md:p-9 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 overflow-hidden relative">
+                <div class="absolute -right-20 -top-20 w-60 h-60 rounded-full border border-yellow-400/10"></div>
+                <div class="relative"><p class="text-imm-gold font-bold text-xs uppercase tracking-widest mb-2">Tri Kompetensi Dasar IMM</p><h3 class="text-2xl md:text-3xl font-extrabold">Religiusitas · Intelektualitas · Humanitas</h3></div>
+                <a href="#profil" class="relative inline-flex items-center gap-2 bg-imm-gold text-imm-darkred px-6 py-3 rounded-full font-extrabold text-sm hover:bg-white transition-all duration-300 shadow-lg">Kenali Nilai Kami <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="artikel" class="py-24 bg-gray-50 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
                 <div>
@@ -562,7 +618,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="articles-grid">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7" id="articles-grid">
                 <article class="article-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-md flex flex-col" data-category="keislaman">
                     <div class="relative overflow-hidden h-52">
                         <img src="https://placehold.co/400x250/cc0000/ffffff?text=Kajian+Islam+Moderat" alt="Artikel 1" class="w-full h-full object-cover transform hover:scale-110 transition duration-700">
@@ -1176,4 +1232,54 @@
                 body.classList.add("cursor-click");
                 setTimeout(()=>body.classList.remove("cursor-click"),180);
             },{passive:true});
+        })();        
+        // Modern homepage interactions
+        (function(){
+            const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+            const sections = Array.from(document.querySelectorAll("section[id]"));
+
+            if ("IntersectionObserver" in window) {
+                const navObserver = new IntersectionObserver((entries)=>{
+                    entries.forEach(entry=>{
+                        if(entry.isIntersecting){
+                            navLinks.forEach(link=>{
+                                link.classList.toggle("imm-active-link", link.getAttribute("href") === "#"+entry.target.id);
+                            });
+                        }
+                    });
+                },{threshold:.4,rootMargin:"-15% 0px -55% 0px"});
+                sections.forEach(section=>navObserver.observe(section));
+            }
+
+            const counters = Array.from(document.querySelectorAll("[data-counter]"));
+            if(counters.length && "IntersectionObserver" in window){
+                const counterObserver = new IntersectionObserver((entries)=>{
+                    entries.forEach(entry=>{
+                        if(!entry.isIntersecting) return;
+                        const el=entry.target, end=parseInt(el.dataset.counter||"0",10);
+                        const start=performance.now();
+                        const tick=(now)=>{
+                            const p=Math.min(1,(now-start)/1100);
+                            const eased=1-Math.pow(1-p,3);
+                            el.textContent=Math.round(end*eased);
+                            if(p<1) requestAnimationFrame(tick);
+                        };
+                        requestAnimationFrame(tick);
+                        counterObserver.unobserve(el);
+                    });
+                },{threshold:.75});
+                counters.forEach(el=>counterObserver.observe(el));
+            }
+
+            if(!reduced && window.matchMedia && window.matchMedia("(pointer:fine)").matches){
+                document.querySelectorAll(".imm-program-card,.article-card").forEach(card=>{
+                    card.addEventListener("pointermove",(e)=>{
+                        const r=card.getBoundingClientRect();
+                        const x=e.clientX-r.left, y=e.clientY-r.top;
+                        card.style.background="radial-gradient(circle at "+x+"px "+y+"px, rgba(255,215,0,.075), rgba(255,255,255,.98) 44%)";
+                    });
+                    card.addEventListener("pointerleave",()=>card.style.background="");
+                });
+            }
         })();
