@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 640" role="img" aria-labelledby="title desc">
+<title id="title">Lambang IMM</title><desc id="desc">Lambang vertikal merah, kuning, hitam dengan tulisan IMM dan simbol hijau di bagian tengah</desc>
+<defs>
+ <linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ef2027"/><stop offset="1" stop-color="#c90000"/></linearGradient>
+ <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff31a"/><stop offset="1" stop-color="#ffd500"/></linearGradient>
+ <linearGradient id="gGreen" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#19a65a"/><stop offset="1" stop-color="#008948"/></linearGradient>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-opacity=".28"/></filter>
+</defs>
+<path d="M0 30Q0 0 30 0h260q30 0 30 30v530l-52 50h-56l-52 30-52-30H56L0 560Z" fill="#171717"/>
+<path d="M42 0h236v600l-28 30h-42l-48-26-48 26H70l-28-30Z" fill="url(#gRed)"/>
+<path d="M91 0h138v640h-42l-68-35-28 35Z" fill="url(#gGold)"/>
+<path d="M0 82h42v480L0 530Z" fill="#222"/>
+<path d="M278 82h42v448l-42 32Z" fill="#222"/>
+<g filter="url(#shadow)">
+ <text x="160" y="198" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-size="142" font-weight="900" letter-spacing="-13" fill="#fff" stroke="#111" stroke-width="5" paint-order="stroke">IMM</text>
+</g>
+<g transform="translate(160 380)">
+ <path d="M0 42c-18-25-30-51-24-82 6-29 24-57 24-57s18 28 24 57c6 31-6 57-24 82Z" fill="#fff" stroke="#00a65a" stroke-width="6"/>
+ <path d="M-8 27c-24 8-50 0-71-18-18-15-31-39-36-61 25-2 52 5 72 19 18 13 30 34 35 60Z" fill="url(#gGreen)" stroke="#008d4c" stroke-width="5"/>
+ <path d="M8 27c24 8 50 0 71-18 18-15 31-39 36-61-25-2-52 5-72 19-18 13-30 34-35 60Z" fill="url(#gGreen)" stroke="#008d4c" stroke-width="5"/>
+ <path d="M-18 4c8 7 13 19 13 32M18 4c-8 7-13 19-13 32" fill="none" stroke="#006f3e" stroke-width="5" stroke-linecap="round"/>
+ <path d="M0 40v98" stroke="#00a65a" stroke-width="7" stroke-linecap="round"/>
+ <path d="M-2 59c-21 0-37-9-49-25M2 59c21 0 37-9 49-25" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+ <path d="M-5-31c-8-13-7-28 1-45M5-31c8-13 7-28-1-45" fill="none" stroke="#00a65a" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g transform="translate(160 526)">
+ <path d="M-128-22Q0-72 128-22L113 38Q0 10-113 38Z" fill="#078f4e" stroke="#fff" stroke-width="6"/>
+ <path d="M-113 0Q0-31 113 0" fill="none" stroke="#ffd900" stroke-width="4" opacity=".95"/>
+ <text x="0" y="4" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#fff">واعتصموا بحبل الله</text>
+</g>
+<g transform="translate(160 593)">
+ <circle r="23" fill="#ffd700" stroke="#fff" stroke-width="4"/>
+ <g stroke="#fff" stroke-width="5" stroke-linecap="round">
+  <path d="M0-61V-40M0 40V61M-61 0h21M40 0h21M-43-43l15 15M28 28l15 15M43-43L28-28M-28 28l-15 15"/>
+ </g>
+</g>
+</svg>
